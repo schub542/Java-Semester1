@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+import java.io.*;
+
+public class Input{
+  
+  public static void main(String [] main) throws IOException{
+  
+    //Determine name of file
+    String reader;
+    Scanner keyboard= new Scanner(System.in);
+    System.out.println("What is the name of this file?");
+    reader=keyboard.nextLine();
+    
+    //Open the file
+    File inputFile= new File(reader);
+    Scanner writtenFile=new Scanner(inputFile);
+    
+    //Print first line of file
+    String retrive;
+    retrive=writtenFile.nextLine();
+    System.out.print("Here is the first line of your file: ");
+    System.out.println(retrive);
+    
+    //Close file with Scanner class close method
+    writtenFile.close();
+    System.out.println("File was closed");
+ 
+  }
+}
