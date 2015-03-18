@@ -1,0 +1,37 @@
+import java.util.Scanner; //Scanner class
+
+import java.io.*;//input and output class
+
+public class IO{
+
+  public static void main(String [] args) throws IOException{
+  //input variables for file name and number of digits of pi I know
+    String fileName;
+    int pi;
+    //initate System input
+    Scanner keyboard=new Scanner(System.in);
+    System.out.println("Please enter the name of the file you would like to save this data to!");
+   
+    fileName=keyboard.nextLine();
+    
+    //add fileName variable to PrintWriter class
+    PrintWriter outputFile=new PrintWriter(fileName);
+    
+    //Find value for pi
+    System.out.println("How many digits of pi do you know?");
+    pi=keyboard.nextInt();
+    
+      // for loop that iterates up to pi times
+    for(int i = 1; i<=pi ; i++){
+      int digit;
+      System.out.println("Yea ok, lets test that! Please enter 10 digits of pi starting at 3!");
+      
+      digit=keyboard.nextInt();
+      //output input to fileName file
+      outputFile.println(digit);
+    }
+    //Close file
+    outputFile.close();
+    System.out.println("Data written to the file.");
+  }
+}
