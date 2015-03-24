@@ -2,16 +2,17 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class InpOut {
+
+public class InputOutput {
   
-  public static void main(String[] args)
+  public static void main(String[] args) 
   {
-    //File path
-    final String INPUT = "goodInput.txt";
-    final String OUTPUT = "triangles.txt";
     
-    //calling makeTriangles method
-    boolean status = makeTriangles(INPUT, OUTPUT);
+    final String INPUT = "C:\\Users\\schub542\\Documents\\Assignment3\\goodInput.txt";
+    final String OUTPUT = "C:\\Users\\schub542\\Documents\\Assignment3\\triangles.txt";
+    
+    //declare buildTriangles method
+    boolean status = buildTriangles(INPUT, OUTPUT);
     
     if (status)
     {
@@ -23,60 +24,58 @@ public class InpOut {
     }
     
   }
-  
-  public static boolean makeTriangles(String inputFile, String outputFile) 
+
+  public static boolean buildTriangles(String inputFile, String outputFile)
   {
-    //Declare holding integer for true values if FileException error exists
-    //Exception for File Error
+    
+    File triangleSides;
+    Scanner writtenFile;
+    PrintWriter resultantSide;
+    
+    //Exception handler for File exception error
     try{  
-      
-      File triangleSides= new File(inputFile);
-      Scanner writtenFile= new Scanner(triangleSides);
-      
-      PrintWriter resultantSide= new PrintWriter (outputFile);
-      //hasNext scanner class method to scan each data point
-      
-      int Error=1;//Declare variable to loop numerical data error till true
-      do{
-        //Exception for numberical data error
-        try{
-          
-          while(writtenFile.hasNext())//read each line of input
-          {
-            int number;  
-            number = writtenFile.nextInt();//input from goodinput file
-            //include cast operator to have compatiable types
-            int a =(int) Math.pow(number,2.0);
-            
-            int number1;
-            number1=writtenFile.nextInt();
-            //include cast operator to have compatiable types
-            int b= (int)Math.pow(number1,2.0);
-            int x= a+b;
-            //Math square root method
-            double c=Math.sqrt(x);
-            Error=2;
-            
-            resultantSide.println(c);
-          }
-        }
-        catch(Exception e)
-        {
-          resultantSide.println("Error");
-        }
-      }while(Error==1);
-      
-      //Close files
-      writtenFile.close();
-      resultantSide.close();
+      triangleSides= new File(inputFile);
+      writtenFile= new Scanner(triangleSides);
+      resultantSide= new PrintWriter (outputFile);
     }
-    catch(FileNotFoundException ex)//catch invalid file
+    
+    catch(FileNotFoundException ex)
     {
       System.out.println("Invalid File");
       return false;
     }
+    
+    //hasNextLine scanner class method to scan each data value
+    do{
+      try{
+        String number1=writtenFile.nextLine();
+        
+        if(number1.length() ==2 )//Check dimensions of triangle
+        {
+          int number = Integer.parseInt(number1);
+          //Determine first and second value
+          int a=number/10;
+          int b= number%10;
+          double c=Math.sqrt(Math.pow(b,2)+ Math.pow(a,2));
+          resultantSide.println(c);
+        }
+        else//Exception to handle dimensions of triangle
+        {
+          resultantSide.println("Error");
+        }
+      }
+      catch(Exception e)//Exception to handle incompatiable data type
+      {
+        String x=writtenFile.nextLine();
+        resultantSide.println("Error");
+      }  
+      
+    }while(writtenFile.hasNextLine());
+  
+    //Close .txt files
+    writtenFile.close();
+    resultantSide.close();
     return true;
     
   }
-  
 }
