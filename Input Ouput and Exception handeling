@@ -8,8 +8,8 @@ public class InputOutput {
   public static void main(String[] args) 
   {
     
-    final String INPUT = "C:\\Users\\schub542\\Documents\\Assignment3\\goodInput.txt";
-    final String OUTPUT = "C:\\Users\\schub542\\Documents\\Assignment3\\triangles.txt";
+    final String INPUT = "InputValues.txt";
+    final String OUTPUT = "OutputSide.txt";
     
     //declare buildTriangles method
     boolean status = buildTriangles(INPUT, OUTPUT);
@@ -34,9 +34,9 @@ public class InputOutput {
     
     //Exception handler for File exception error
     try{  
-      triangleSides= new File(inputFile);
-      writtenFile= new Scanner(triangleSides);
-      resultantSide= new PrintWriter (outputFile);
+      Sides= new File(inputFile);
+      writtenSides= new Scanner(Sides);
+      outputSide= new PrintWriter (outputFile);
     }
     
     catch(FileNotFoundException ex)
@@ -48,7 +48,7 @@ public class InputOutput {
     //hasNextLine scanner class method to scan each data value
     do{
       try{
-        String number1=writtenFile.nextLine();
+        String number1=writtenSides.nextLine();
         
         if(number1.length() ==2 )//Check dimensions of triangle
         {
@@ -57,24 +57,24 @@ public class InputOutput {
           int a=number/10;
           int b= number%10;
           double c=Math.sqrt(Math.pow(b,2)+ Math.pow(a,2));
-          resultantSide.println(c);
+          outputSide.println(c);
         }
         else//Exception to handle dimensions of triangle
         {
-          resultantSide.println("Error");
+          outputSide.println("Error");
         }
       }
       catch(Exception e)//Exception to handle incompatiable data type
       {
         String x=writtenFile.nextLine();
-        resultantSide.println("Error");
+        outputSide.println("Error");
       }  
       
-    }while(writtenFile.hasNextLine());
+    }while(writtenSides.hasNextLine());
   
     //Close .txt files
-    writtenFile.close();
-    resultantSide.close();
+    writtenSides.close();
+    outputSide.close();
     return true;
     
   }
