@@ -1,0 +1,25 @@
+//object relevant to java
+
+public class RectangleDemo{
+  
+  public static void main(String [] args){
+    
+    //First thing to do is create the Rectangle object
+    
+    Rectangle box= new Rectangle(); // Rectangle object
+    
+    box.setWidth(9991.9870);
+    box.setLength(254.0);
+    
+    //Work on the get width and get length methods.
+    
+    System.out.println("The width of the box is " + box.getWidth());
+    
+    System.out.println("The length of the box is "  +box.getLength());
+    
+    //Display the area
+    
+    System.out.println("The area of the box is " +box.getArea());
+  }
+  
+}
